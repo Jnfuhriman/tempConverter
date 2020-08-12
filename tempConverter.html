@@ -1,0 +1,80 @@
+<!DOCTYPE>
+<head>
+    <meta charset "utf-8" />
+    <title>Temp Converter</title>
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css />
+</head>
+
+<body>
+    <header id ="quickDescription">
+        <div class="level-item is-centered is-size-1"><h1 class ="TitleWords">A simple tool to convert temperatures</h1></div>
+        <br>
+    </header>
+    <br>
+    <br>
+    <div id="main">
+        <div id="cResult"></div>
+        <div id="fResult"></div>
+        <p class ="level-item is-centered is-size-5">Fahrenheit goes in the first box, Celsius in the second</p>
+        <form id ="inputForm" class ="level-item is-centered">
+            <input type ="text" id ="fInput" name ="fTemp" placeholder ="fahrenheit to celsius"></input><br><br>
+            <input type ="text" id ="cInput" name ="cTemp" placeholder ="celsius to fahrenheit"></input><br><br>
+            <input type ="submit" id ="submitButton" value ="Convert"></input>
+        </form>
+        
+    </div>
+    <footer id ="foot">
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var queryString = window.location.search;
+        queryString = queryString.split('&');
+        var fBox = queryString[0];
+        fBox = fBox.split('=');
+        var fTemp = fBox[1];
+        var cBox = queryString[1];
+        cBox = cBox.split('=');
+        var cTemp = cBox[1];
+
+        function convertFToC(fTemp){
+            var convertedTempC = (fTemp-32)*.5556;
+            convertedTempC = convertedTempC.toFixed(0);
+            var cDeg = 'Celsius';
+            var insertCTemp = '<div class="level-item is-centered is-size-3"><h2>'+convertedTempC+ ' '+ cDeg+ '</h2></div><br>';
+            $('#cResult').append(insertCTemp);
+        };
+
+        function convertCToF(cTemp){
+            var convertedTempF = cTemp*1.8+32;
+            convertedTempF = convertedTempF.toFixed(0);
+            var fDeg = 'Fahrenheit';
+            var insertFTemp = '<div class="level-item is-centered is-size-3"><h2>'+ convertedTempF+' '+ fDeg+ '</h2></div><br>';
+            $('#fResult').html(insertFTemp);
+        };
+
+        $(document).ready(function(){
+            if (window.location.search != '?fTemp=&cTemp='){
+                convertFToC(fTemp);
+                $('#fInput').attr('value', fTemp)
+                if (queryString[1] != 'cTemp=')
+                convertCToF(cTemp);
+                $('#cInput').attr('value', cTemp)
+            };
+        });
+    </script>
+    
+    <style>
+        body{
+            height:100vh;
+            background-color:aquamarine;
+        }
+        header{
+            background-color:black;
+        }
+        .titleWords{
+            margin: auto;
+            color:white;
+        }
+    </style>
+</body>

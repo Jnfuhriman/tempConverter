@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset "utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prompt Spike</title>
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css />
+</head>
+<body class ="hero is-fullheight has-background-white-ter">
+    <section id ="body">
+        <div class ="level is-size-1 ">
+            <div class ="level-item is-centered">Temp Converter</div>
+        </div>
+        <div class ="level-item is-centered is-size-3">
+            <div id ="newTemp"></div>
+        </div>
+        <div class ="level-item is-centered">
+            <button class ="button has-text-centered has-background-grey-lighter has-text-dark" id="inputTemp">Click to give temp</button>
+        </div>    
+    </section>
+
+</body>
+<footer>
+
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    function getInput(){
+    var userTemp = prompt('What temp do you want to convert?');
+    var newUserTemp = (userTemp-32)*.5556;
+    newUserTemp = Math.round(newUserTemp);
+    var tempString = '<div>'+ userTemp+' degrees Fahrenheit converts to '+ newUserTemp+ ' degrees Celsius'+'</div>';
+    $('#newTemp').html(tempString);
+}
+
+$('#inputTemp').click(getInput);
+
+
+});
+</script>
